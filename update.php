@@ -21,6 +21,6 @@ if (isset($_POST['submit'])) {
     if (mysqli_query($conn, $sql)) {
         echo "New record updated successfully";
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        echo "Error: test" . $sql . "<br>" . mysqli_error($conn);
     }
 }
