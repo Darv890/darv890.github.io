@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Aplikasi Kas Digital</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f4f6f9;
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+
+        form,
+        .filter {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        input,
+        select,
+        button {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #27ae60;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background: #219150;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background: #27ae60;
+            color: white;
+        }
+
+        .saldo {
+            font-weight: bold;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+
+        .action-btn {
+            background: #3498db;
+            margin: 2px;
+            padding: 4px 8px;
+            font-size: 12px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>💰 Aplikasi Pencatatan Kas Digital</h2>
+
+    <!-- Form Input -->
+    <form id="formKas">
+        <input type="hidden" id="editIndex">
+        <label>Jenis Transaksi:</label>
+        <select id="jenis" required>
+            <option value="">-- Pilih --</option>
+            <option value="pemasukan">Pemasukan</option>
+            <option value="pengeluaran">Pengeluaran</option>
+        </select>
+
+        <label>Nama:</label>
+        <input type="text" id="nama" placeholder="Nama pembayar / penerima" required>
+
+        <label>Jumlah (Rp):</label>
+        <input type="number" id="jumlah" min="0" required>
+
+        <label>Keterangan:</label>
+        <input type="text" id="keterangan" placeholder="Keterangan transaksi">
+
+        <button type="submit">Simpan Transaksi</button>
+    </form>
+
+    <!-- Filter -->
+    <div class="filter">
+        <label>Cari Nama:</label>
+        <input type="text" id="searchNama" placeholder="Cari berdasarkan nama">
+
+        <label>Filter Jenis:</label>
+        <select id="filterJenis">
+            <option value="">Semua</option>
+            <option value="pemasukan">Pemasukan</option>
+            <option value="pengeluaran">Pengeluaran</option>
+        </select>
+
+        <button onclick="exportToExcel()">📂 Ekspor ke Excel</button>
+    </div>
+
+    <!-- Tabel Riwayat -->
+    <h3>📜 Riwayat Transaksi</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Tanggal</th>
+                <th>Jenis</th>
+                <th>Nama</th>
+                <th>Jumlah</th>
+                <th>Keterangan</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody id="tabelKas"></tbody>
+    </table>
+
+    <p class="saldo">Sisa Saldo: Rp <span id="saldo">0</span></p>
+
+    <script>
+        let transaksi = JSON.parse(localStorage.getItem("kasData")) || [];
+        console.log(transaksi);
+
+        function updateTabel() {
+            let tabel = document.getElementById("tabelKas");
+            tabel.innerHTML = "";
+            let saldo = 0;
+
+            let searchNama = document.getElementById("searchNama").value.toLowerCase();
+            let filterJenis = document.getElementById("filterJenis").value;
+
+            transaksi.forEach((item, index) => {
+                if (item.nama.toLowerCase().includes(searchNama) &&
+                    (filterJenis === "" || item.jenis === filterJenis)) {
+
+                    let row = tabel.insertRow();
+                    row.insertCell(0).innerText = item.tanggal;
+                    row.insertCell(1).innerText = item.jenis;
+                    row.insertCell(2).innerText = item.nama;
+                    row.insertCell(3).innerText = "Rp " + item.jumlah.toLocaleString();
+                    row.insertCell(4).innerText = item.keterangan || "-";
+
+                    // Tombol Edit & Hapus
+                    let actionCell = row.insertCell(5);
+                    actionCell.innerHTML = `
+                    <button class="action-btn" onclick="editData(${index})">Edit</button>
+                    <button class="action-btn delete-btn" onclick="hapusData(${index})">Hapus</button>
+                `;
+
+                    if (item.jenis === "pemasukan") saldo += item.jumlah;
+                    else saldo -= item.jumlah;
+                }
+            });
+
+            document.getElementById("saldo").innerText = saldo.toLocaleString();
+            localStorage.setItem("kasData", JSON.stringify(transaksi));
+        }
+
+        document.getElementById("formKas").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let jenis = document.getElementById("jenis").value;
+            console.log(jenis);
+            let nama = document.getElementById("nama").value;
+            let jumlah = parseInt(document.getElementById("jumlah").value);
+            let keterangan = document.getElementById("keterangan").value;
+            let editIndex = document.getElementById("editIndex").value;
+
+            if (editIndex) {
+                // Saat edit, tetap pakai tanggal lama
+                transaksi[editIndex] = {
+                    ...transaksi[editIndex],
+                    jenis,
+                    nama,
+                    jumlah,
+                    keterangan
+                };
+                document.getElementById("editIndex").value = "";
+            } else {
+                // Saat tambah data baru, buat tanggal sekarang
+                let tanggal = new Date().toLocaleString("id-ID");
+                transaksi.push({
+                    tanggal,
+                    jenis,
+                    nama,
+                    jumlah,
+                    keterangan
+                });
+            }
+
+
+            updateTabel();
+            this.reset();
+        });
+
+        function editData(index) {
+            let data = transaksi[index];
+            document.getElementById("jenis").value = data.jenis;
+            document.getElementById("nama").value = data.nama;
+            document.getElementById("jumlah").value = data.jumlah;
+            document.getElementById("keterangan").value = data.keterangan;
+            document.getElementById("editIndex").value = index;
+        }
+
+        function hapusData(index) {
+            if (confirm("Yakin ingin menghapus data ini?")) {
+                transaksi.splice(index, 1);
+                updateTabel();
+            }
+        }
+
+        function exportToExcel() {
+            // Buat header kolom
+            let header = ["Tanggal", "Jenis", "Nama", "Jumlah", "Keterangan"];
+
+            // Gabungkan header + data transaksi
+            let rows = transaksi.map(row => [
+                row.tanggal,
+                row.jenis,
+                row.nama,
+                row.jumlah,
+                row.keterangan
+            ]);
+
+            // Gabungkan menjadi CSV string
+            let csvContent = [header, ...rows]
+                .map(e => e.join(";")) // pisahkan dengan koma
+                .join("\n");
+
+            // Simpan sebagai file CSV
+            let blob = new Blob([csvContent], {
+                type: "text/csv;charset=utf-8;"
+            });
+            let url = URL.createObjectURL(blob);
+            let a = document.createElement("a");
+            a.href = url;
+            a.download = "kas_digital.csv";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+
+        document.getElementById("searchNama").addEventListener("input", updateTabel);
+        document.getElementById("filterJenis").addEventListener("change", updateTabel);
+
+        updateTabel();
+    </script>
+
+</body>
+
+</html>
