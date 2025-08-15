@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coding - Home</title>
-    <link rel="stylesheet" href="./assets/styles/index.css">
+    <link rel="stylesheet" href="./assets/styles/index.css" />
 </head>
 
 <body>
@@ -329,33 +329,46 @@
                         Kode Pos 10110</p>
                 </div>
             </div>
-            <div>
+            <div class="contact-grid-2">
                 <h2>Contact Us</h2>
                 <form action="contact/store.php" method="post" class="form-contact">
                     <!-- <div class="form-group"> -->
-                    <div class="form-label">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" placeholder="Full Name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Email Address" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" name="name" id="name" value="" placeholder="Name">
                     </div>
-                    <div class="form-label">
+                    <div class="form-group">
                         <label for="email">Email</label>
                         <input type="text" name="email" id="email" value="" placeholder="Email">
                     </div>
                     <!-- </div> -->
-                    <div class="form-label">
+                    <div class="form-group">
                         <label for="subject">Subject</label>
                         <input type="text" name="subject" id="subject" placeholder="Subject">
                     </div>
-                    <div class="form-label">
+                    <div class="form-group">
                         <label for="message">Message</label>
                         <textarea name="message" id="message" placeholder="Message"></textarea>
                     </div>
-                    <div class="form-option">
-                        <div>
-                            <input type="checkbox" name="collaboratively" id="collaboratively">
-                            <label for="collaboratively">Collaboratively facilitate innovative supply chains</label>
-                        </div>
+                    <!-- <div class="form-option"> -->
+                    <div class="checkbox">
+                        <input type="checkbox" name="collaboratively" id="collaboratively">
+                        <span for="collaboratively">
+                            Collaboratively facilitate innovative supply chains
+                            <!-- <input type="checkbox" name="collaboratively" id="collaboratively"> -->
+                        </span>
                     </div>
+                    <!-- </div> -->
                     <div>
                         <input type="submit" name="submit" id="submit" value="Submit" class="btn-secondary">
                     </div>

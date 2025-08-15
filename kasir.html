@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kasir Sederhana</title>
+  <style>
+  h2 {
+  color: rgb(158, 0, 26);
+}
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    input, select, button {
+      padding: 8px;
+      margin-top: 10px;
+    }
+    #total {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    #printButton {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #printButton:hover {
+      background-color: #006F9A;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🎀 Kasir Gemoi Imut Kawai 🎀</h2>
+
+  <label for="itemSelect">Pilih Barang:</label>
+  <select id="itemSelect">
+    <option value="A001">Teh Botol - Rp5000</option>
+    <option value="A002">Roti Bakar - Rp12000</option>
+    <option value="A003">Indomie Goreng - Rp7000</option>
+    <option value="A004">Sosis Kenzler - Rp10000</option>
+    <option value="A005">Es Krim - Rp5000</option>
+    <option value="A006">Kentang Goreng - Rp10000</option>
+  </select>
+
+  <br>
+  <label for="quantityInput">Jumlah:</label>
+  <input type="number" id="quantityInput" min="1" value="1">
+
+  <br>
+  <button onclick="addToCart()">Tambah ke Keranjang</button>
+
+  <table id="cartTable">
+    <thead>
+      <tr>
+        <th>Nama Barang</th>
+        <th>Harga</th>
+        <th>Jumlah</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <div id="total">Total: Rp0</div>
+
+  <button id="printButton" onclick="printReceipt()">Cetak Struk 🧾</button>
+
+  <script>
+    const items = {
+      A001: { name: "Teh Botol", price: 5000 },
+      A002: { name: "Roti", price: 6000 },
+      A003: { name: "Indomie Goreng", price: 7000 },
+      A004: { name: "Sosis Kenzler", price: 10000 },
+      A005: { name: "Es Krim", price: 5000 },
+      A006: { name: "Kentang Goreng", price: 10000 },
+    };
+
+    const cart = [];
+
+    function addToCart() {
+      const code = document.getElementById("itemSelect").value;
+      const qty = parseInt(document.getElementById("quantityInput").value);
+      const item = items[code];
+
+      if (!item || qty < 1) return;
+
+      const subtotal = item.price * qty;
+      cart.push({ name: item.name, price: item.price, qty, subtotal });
+
+      renderCart();
+    }
+
+    function renderCart() {
+      const tbody = document.querySelector("#cartTable tbody");
+      tbody.innerHTML = "";
+
+      let total = 0;
+      cart.forEach((item) => {
+        total += item.subtotal;
+        const row = `<tr>
+          <td>${item.name}</td>
+          <td>Rp${item.price}</td>
+          <td>${item.qty}</td>
+          <td>Rp${item.subtotal}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+
+      document.getElementById("total").innerText = "Total: Rp" + total;
+    }
+
+    function printReceipt() {
+      let receiptWindow = window.open('', '', 'width=400,height=600');
+      let receiptHTML = `<html><head><title>Struk Belanja</title></head><body>`;
+      receiptHTML += `<h2>🧾 Struk Belanja</h2>`;
+      receiptHTML += `<table border="1" cellspacing="0" cellpadding="5">
+        <tr><th>Barang</th><th>Harga</th><th>Jumlah</th><th>Subtotal</th></tr>`;
+
+      let total = 0;
+      cart.forEach((item) => {
+        total += item.subtotal;
+        receiptHTML += `<tr>
+          <td>${item.name}</td>
+          <td>Rp${item.price}</td>
+          <td>${item.qty}</td>
+          <td>Rp${item.subtotal}</td>
+        </tr>`;
+      });
+
+      receiptHTML += `</table>`;
+      receiptHTML += `<h3>Total Bayar: Rp${total}</h3>`;
+      receiptHTML += `<p>Terima kasih telah berbelanja!</p>`;
+      receiptHTML += `</body></html>`;
+
+      receiptWindow.document.write(receiptHTML);
+      receiptWindow.document.close();
+      receiptWindow.focus();
+      receiptWindow.print();
+    }
+  </script>
+
+</body>
+</html>
