@@ -85,28 +85,46 @@ header {
 
 .contact-section {
     display: flex;
-    gap: 1rem;
-    width: 100%;
-    max-width: 1200px;
-    margin-top: 1rem;
     flex-wrap: wrap;
+    gap: 32px;
+    /* jarak antar kolom kiri/kanan */
+    padding: 64px 32px;
+    margin-top: 64px;
+    max-width: 1200px;
+    /* opsional: supaya konten tidak terlalu lebar */
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
 
     /* @media screen and (max-width: 767px) {
         grid-template-columns: 1fr;
+        flex-wrap: wrap;
     } */
 
-    /* .form-contact {
-        .form-group {
+    .contact-grid-1,
+    .contact-grid-2 {
+        flex: 1 1;
+        /* dua kolom di desktop, bisa turun jika sempit */
+        min-width: 0;
+        /* penting untuk mencegah overflow */
+    }
+
+    .form-contact {
+        width: 100%;
+        /* .form-group {
             display: flex;
             gap: 16px;
-        }
-    } */
+        } */
+    }
 
     .contact-grid-1 {
         display: flex;
-        gap: 48px;
         flex-direction: column;
-        width: 50%;
+        gap: 32px;
+    }
+
+    .contact-grid-2 .form-contact {
+        width: 100%;
     }
 
     .contact-content {
@@ -655,50 +673,24 @@ h6 {
     }
 }
 
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
+.form-row {
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 16px;
+}
 
-    .left-side,
-    .form-contact {
-        width: 100%;
-    }
-
-    .form-row {
-        flex-direction: column;
-        gap: 0;
-    }
-
-    .form-row .form-group {
-        flex: 1;
-    }
+.form-row .form-group {
+    flex: 1 1 50%;
+    /* dua kolom, masing-masing setengah */
+    min-width: 0;
+    /* biar input bisa menyusut */
 }
 
 .form-group {
     margin-bottom: 1rem;
 }
 
-.form-row {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.form-row .form-group {
-    flex: 1 1 200px;
-}
-
-label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 500;
-}
-
-.form-contact {
-    flex: 1 1 300px;
-    max-width: 600px;
-}
-
+/* Input elements */
 input[type=text],
 input[type=email],
 input[type=password],
@@ -710,27 +702,15 @@ textarea {
     border-radius: 8px;
     font-size: 14px;
     font-family: inherit;
+    box-sizing: border-box;
 }
 
-textarea {
-    height: 120px;
-    resize: vertical;
-}
-
-.checkbox {
-    margin: 1rem 0;
-    display: inline-flex;
-    align-items: center;
-}
-
-@media (max-width: 1024px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .left-side,
-    .form-contact {
-        width: 100%;
+/* Mobile: stack ke bawah */
+@media (max-width: 768px) {
+    .contact-section {
+        gap: 24px;
+        padding: 32px 16px;
+        margin-top: 32px;
     }
 
     .form-row {
@@ -739,11 +719,18 @@ textarea {
     }
 
     .form-row .form-group {
-        flex: 1;
+        flex: 1 1 100%;
     }
 }
 
-.contact-grid-2 {
-    flex: 1 1 300px;
-    max-width: 600px;
+/* (Opsional) Perbaikan checkbox agar label bisa diklik */
+.checkbox {
+    margin: 1rem 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox label {
+    cursor: pointer;
 }

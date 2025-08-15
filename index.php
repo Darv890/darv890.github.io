@@ -312,7 +312,6 @@
 
         </section>
         <section class="contact-section">
-
             <div class="contact-grid-1">
                 <h2 class="heading-contact"><span class="text-blue">Start</span> a conversation with us</h2>
                 <div class="contact-content">
@@ -332,26 +331,24 @@
             <div class="contact-grid-2">
                 <h2>Contact Us</h2>
                 <form action="contact/store.php" method="post" class="form-contact">
-                    <!-- <div class="form-group"> -->
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="fullName">Full Name</label>
-                            <input type="text" id="fullName" name="fullName" placeholder="Full Name" required />
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="Full Name" required />
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address</label>
                             <input type="email" id="email" name="email" placeholder="Email Address" required />
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" name="name" id="name" value="" placeholder="Name">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="text" name="email" id="email" value="" placeholder="Email">
-                    </div>
-                    <!-- </div> -->
+                    </div> -->
                     <div class="form-group">
                         <label for="subject">Subject</label>
                         <input type="text" name="subject" id="subject" placeholder="Subject">
@@ -363,10 +360,10 @@
                     <!-- <div class="form-option"> -->
                     <div class="checkbox">
                         <input type="checkbox" name="collaboratively" id="collaboratively">
-                        <span for="collaboratively">
+                        <label for="collaboratively">
                             Collaboratively facilitate innovative supply chains
                             <!-- <input type="checkbox" name="collaboratively" id="collaboratively"> -->
-                        </span>
+                        </label>
                     </div>
                     <!-- </div> -->
                     <div>
@@ -374,7 +371,6 @@
                     </div>
                 </form>
             </div>
-
         </section>
     </main>
     <footer>
