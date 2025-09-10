@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coding - Home</title>
     <link rel="stylesheet" href="./assets/styles/index.css" />
+    <link rel="stylesheet" href="./assets/styles/switch.css" />
+
 </head>
 
 <body>
-    <header class="header">
+    <header class="header" id="header">
         <div>
             <img src="./assets/images/facebook_logo.webp" alt="facebook logo" class="header-logo">
         </div>
@@ -30,10 +32,18 @@
                 <a href="/coding/basic_guide.php">Basic Guide</a>
             </div>
         </div>
-        <div>
-            <a href="/coding/register.php"><button class="button_register">
-                    Register
-                </button></a>
+        <div class="display-button">
+            <div>
+                <a href="/coding/register.php"><button class="button_register">
+                        Register
+                    </button></a>
+            </div>
+            <div>
+                <label class="switch">
+                    <input onchange="toggleTheme()" type="checkbox" id="toggle">
+                    <span class="slider round"></span>
+                </label>
+            </div>
         </div>
     </header>
     <main>
@@ -330,44 +340,36 @@
             </div>
             <div class="contact-grid-2">
                 <h2>Contact Us</h2>
-                <form action="contact/store.php" method="post" class="form-contact">
+                <!-- <form action="contact/store.php" method="post" class="form-contact"> -->
+                <form onsubmit="submitForm(event)" class="form-contact" id="contact-form">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" placeholder="Full Name" required />
+                            <input type="text" id="name" name="name" placeholder="Full Name" class="form-name" required />
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address</label>
                             <input type="email" id="email" name="email" placeholder="Email Address" required />
                         </div>
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name" value="" placeholder="Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="text" name="email" id="email" value="" placeholder="Email">
-                    </div> -->
                     <div class="form-group">
                         <label for="subject">Subject</label>
-                        <input type="text" name="subject" id="subject" placeholder="Subject">
+                        <input type="text" name="subject" id="subject" placeholder="Subject" class="form-subject required">
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
                         <textarea name="message" id="message" placeholder="Message"></textarea>
                     </div>
-                    <!-- <div class="form-option"> -->
                     <div class="checkbox">
-                        <input type="checkbox" name="collaboratively" id="collaboratively">
+                        <input type="checkbox" name="collaboratively" id="collaboratively" class="form-collaboratively">
                         <label for="collaboratively">
                             Collaboratively facilitate innovative supply chains
-                            <!-- <input type="checkbox" name="collaboratively" id="collaboratively"> -->
                         </label>
                     </div>
-                    <!-- </div> -->
                     <div>
-                        <input type="submit" name="submit" id="submit" value="Submit" class="btn-secondary">
+                        <!-- <input type="submit" name="submit" id="submit" value="Submit" class="btn-secondary"> -->
+                        <button type="submit" class="btn-secondary">Submit</button>
+                        <button type="button" class="btn-primary" onclick="getContactData()">Get Contact Data</button>
                     </div>
                 </form>
             </div>
@@ -426,6 +428,7 @@
             <p>&copy; 2023 Lintas Nusantara. All rights reserved.</p>
         </div>
     </footer>
+    <script src="./assets/scripts/index.js"></script>
 </body>
 
 </html>

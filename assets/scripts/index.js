@@ -126,3 +126,115 @@ for (let index = 0; index < buah1.length; index++) {
     const element = buah1[index];
     console.log(element);
 }
+
+const objectBuah = {
+    value: "Apel",
+    value1: "Pisang",
+    value2: "Jeruk",
+    value3: "Melon"
+}
+console.log(objectBuah);
+console.log(objectBuah.value);
+console.log(objectBuah.value2);
+
+function submitForm(event) {
+    event.preventDefault();
+    const form = document.getElementById("contact-form");
+
+    const name = document.getElementsByClassName("form-name");
+    console.log(name);
+    const nameValue = name.name.value;
+    console.log(nameValue);
+    // if (nameValue == "" || nameValue == null || nameValue == undefined || nameValue == NaN || nameValue == false || nameValue == 0) {
+    //     alert("Nama tidak boleh kosong");
+    //     return
+    // }
+    let email = document.getElementById("email");
+    console.log(email);
+    let emailValue = email.value;
+    console.log(emailValue);
+    // if (!emailValue) {
+    //     alert("Email tidak boleh kosong");
+    //     return
+    // }
+
+    if (!emailValue && !nameValue) {
+        alert("Email dan Nama tidak boleh kosong");
+        return
+    }
+    let subject = document.getElementById("subject");
+    console.log(subject);
+    let subjectValue = subject.value;
+    console.log(subjectValue);
+    let subjectClasslist = subject.classList;
+    subjectClasslist.add("required-red");
+    console.log(subjectClasslist);
+    for (let index = 0; index < subjectClasslist.length; index++) {
+        const element = subjectClasslist[index];
+        console.log(element);
+    }
+
+    let message = document.getElementById("message");
+    console.log(message);
+    const messageValue = message.value;
+    console.log(messageValue);
+    let collaboratively = document.getElementsByClassName("form-collaboratively");
+    console.log(collaboratively);
+    const collaborativelyValue = collaboratively.collaboratively.checked;
+    console.log(collaborativelyValue);
+
+    const contact = {
+        name: nameValue,
+        email: emailValue,
+        subject: subjectValue,
+        message: messageValue,
+        collaboratively: collaborativelyValue
+    }
+    console.log(contact);
+    const jsonContact = JSON.stringify(contact);
+    console.log(jsonContact);
+
+    localStorage.setItem("contact", jsonContact);
+
+    form.reset();
+
+    alert("Name: " + nameValue + "\nEmail: " + emailValue + "\nSubject: " + subjectValue + "\nMessage: " + messageValue + "\nCollaboratively: " + collaborativelyValue);
+
+}
+
+function getContactData() {
+    const contact = localStorage.getItem("contact");
+    console.log(contact);
+    const contactValue = JSON.parse(contact);
+    console.log(contactValue);
+    const name = document.getElementsByClassName("form-name");
+    console.log(name);
+    name.name.value = contactValue.name;
+    const email = document.getElementById("email");
+    console.log(email);
+    email.value = contactValue.email;
+    const subject = document.getElementById("subject");
+    console.log(subject);
+    subject.value = contactValue.subject;
+    const message = document.getElementById("message");
+    console.log(message);
+    message.value = contactValue.message;
+    const collaboratively = document.getElementsByClassName("form-collaboratively");
+    console.log(collaboratively);
+    collaboratively.collaboratively.checked = contactValue.collaboratively;
+}
+
+function toggleTheme() {
+    const body = document.body;
+    console.log(body);
+    body.classList.toggle("dark-mode");
+
+    const headerElements = document.getElementsByTagName("header");
+    console.log(headerElements);
+    for (let index = 0; index < headerElements.length; index++) {
+        const element = headerElements[index];
+        console.log(element);
+        element.classList.toggle("dark-mode");
+    }
+
+}
