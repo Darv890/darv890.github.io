@@ -1,0 +1,106 @@
+.body-bg {
+    background-image: url(../images/bg_regist.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+}
+
+.form-row .form-group {
+    flex: 1 1 50%;
+    /* dua kolom, masing-masing setengah */
+    min-width: 0;
+    /* biar input bisa menyusut */
+}
+
+.form-group {
+    margin-bottom: 1rem;
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Input elements */
+input[type=text],
+input[type=email],
+input[type=password],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    box-sizing: border-box;
+    background: transparent;
+    color: #ffffff;
+
+    &::placeholder {
+        color: #ffffff;
+    }
+}
+
+.bg-blur {
+    backdrop-filter: blur(8px);
+    background-color: #00000045;
+    padding: 32px;
+    border-radius: 16px;
+    border: 1px solid #e5e5e5;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.mb-2 {
+    margin-bottom: 4px;
+}
+
+.mb-4 {
+    margin-bottom: 8px;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.w-25 {
+    width: 25%;
+}
+
+.btn-secondary {
+    &:hover {
+        box-shadow: 0px 0px 10px 0px #e5e5e5;
+    }
+
+    background-color: #4f9be9;
+    color: #ffffff;
+    font-family: 'Times New Roman',
+    Times,
+    serif;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}

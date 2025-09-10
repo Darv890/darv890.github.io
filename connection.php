@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "db_latihan");
+$conn = mysqli_connect("localhost", "root", "root", "db_coding");
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 } 
