@@ -11,16 +11,16 @@
 <body class="body-bg">
     <main>
         <section class="wrapper">
-            <form action="" method="post" class="bg-blur w-25">
+            <form action="post_register.php" enctype="multipart/form-data" method="post" class="bg-blur w-25">
                 <h2 class="text-center text-white">Register</h2>
                 <div class="form-row">
                     <div class="form-group text-white">
-                        <label for="Username">Username</label>
-                        <input type="text" id="Username" name="Username" placeholder="Username" required />
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Username" required />
                     </div>
                     <div class="form-group text-white">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="Full Name" class="form-name" required />
+                        <label for="full_name">Full Name</label>
+                        <input type="text" id="full_name" name="full_name" placeholder="Full Name" class="form-name" required />
                     </div>
                 </div>
                 <div class="form-group text-white">
@@ -29,10 +29,10 @@
                 </div>
                 <div class="form-group text-white">
                     <label for="password">Password</label>
-                    <input type="text" id="password" name="password" placeholder="Password" class="form-password" required />
+                    <input type="password" id="password" name="password" placeholder="Password" class="form-password" required />
                 </div>
                 <div>
-                    <button type="submit" class="btn-secondary w-full">Register</button>
+                    <button type="submit" name="submit" class="btn-secondary w-full">Register</button>
                 </div>
             </form>
 
