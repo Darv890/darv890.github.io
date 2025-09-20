@@ -1,3 +1,11 @@
+<?php
+session_start();
+// $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+$user = null;
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,11 +41,22 @@
             </div>
         </div>
         <div class="display-button">
-            <div>
-                <a href="/coding/register.php"><button class="button_register">
-                        Register
-                    </button></a>
-            </div>
+            <?php if (!isset($user)): ?>
+                <div>
+                    <a href="/coding/register.php"><button class="button_register">
+                            Register
+                        </button></a>
+                </div>
+            <?php else: ?>
+                <div>
+                    <p><?php echo "Hi! " . $user['full_name']; ?></p>
+                </div>
+                <div>
+                    <a href="/coding/logout.php">
+                        <button class="button_register">Logout</button>
+                    </a>
+                </div>
+            <?php endif ?>
             <div>
                 <label class="switch">
                     <input onchange="toggleTheme()" type="checkbox" id="toggle">

@@ -7,8 +7,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" href="./assets/styles/register.css">
+    <title>Admin Register</title>
+    <link rel="stylesheet" href="../assets/styles/register.css">
 </head>
 
 <body class="body-bg">
@@ -23,7 +23,7 @@ session_start();
                 <?php endif ?>
 
                 <form action="post_register.php" method="post">
-                    <h2 class="text-center text-white">Register</h2>
+                    <h2 class="text-center text-white">Admin Register</h2>
                     <div class="form-row">
                         <div class="form-group text-white">
                             <label for="username">Username</label>
@@ -46,7 +46,7 @@ session_start();
                         <button type="submit" name="submit" class="btn-secondary w-full">Register</button>
                     </div>
                     <div>
-                        <p class="text-white text-center">Already have an account? <a href="./login.php" class="text-white">Login</a></p>
+                        <p class="text-white text-center">Already have an account? <a href="./admin/login.php" class="text-white">Admin Login</a></p>
                     </div>
                 </form>
             </div>
