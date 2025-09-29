@@ -17,15 +17,30 @@ if (isset($_POST['submit'])) {
     try {
         $query = $conn->query($sql);
         $user = $query->fetch_assoc();
+        $object = (object)$user;
+        var_dump($object);
+        var_dump($object->role);
+        $array = (array)$object;
+        var_dump($array['role']);
         if (!$user) {
             $_SESSION['error'] = "Invalid username or password!";
             header("Location: login.php");
             exit;
         }
         if (password_verify($password, $user['password'])) {
-            $_SESSION['user'] = $user;
-            header("Location: index.php");
-            exit;
+            if ($user['role'] === 'admin') {
+                $_SESSION['user'] = $user;
+                header("Location: admin/index.php");
+                exit;
+            } else if ($user['role'] === 'petugas') {
+                $_SESSION['user'] = $user;
+                header("Location: petugas/index.php");
+                exit;
+            } else {
+                $_SESSION['user'] = $user;
+                header("Location: index.php");
+                exit;
+            }
         } else {
             $_SESSION['error'] = "Invalid username or password!";
             header("Location: login.php");
