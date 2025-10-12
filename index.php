@@ -1,4 +1,5 @@
 <?php
+include "connection.php";
 session_start();
 // $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 $user = null;
@@ -78,6 +79,94 @@ if (isset($_SESSION['user'])) {
                 </div>
             </div>
             <div class="destination-choice">
+                <?php
+                $result = $conn->query("SELECT * FROM destinations ORDER BY id DESC LIMIT 10");
+                while ($row = $result->fetch_assoc()) { ?>
+                    <div class="choice-content">
+                        <a href="destination.php">
+                            <div class="image">
+                                <img src="<?php echo $row['path_url']; ?>" alt="bedugul bali" class="choice-content-image">
+                            </div>
+                            <div>
+                                <div class="choice-content-title">
+                                    <img src="./assets/images/location-icon.webp" alt="location icon" class="location-icon">
+                                    <h5><?php echo $row['name']; ?></h5>
+                                </div>
+                                <div>
+                                    <p><?php echo $row['description']; ?></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <?php }
+                ?>
+
+                <!-- <div class="choice-content">
+                    <a href="destination.php">
+                        <div class="image">
+                            <img src="./assets/images/eiffel-paris.jpg" alt="eiffel paris" class="choice-content-image">
+                        </div>
+                        <div>
+                            <div class="choice-content-title">
+                                <img src="./assets/images/location-icon.webp" alt="location icon" class="location-icon">
+                                <h5>Eiffel Tower (Paris)</h5>
+                            </div>
+                            <div>
+                                <p>lorem ipsum dolor sit amet</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="choice-content">
+                    <a href="destination.php">
+                        <div class="image">
+                            <img src="./assets/images/lake-vietnam.webp" alt="lake vietnam" class="choice-content-image">
+                        </div>
+                        <div>
+                            <div class="choice-content-title">
+                                <img src="./assets/images/location-icon.webp" alt="location icon" class="location-icon">
+                                <h5>Lake (Vietnam)</h5>
+                            </div>
+                            <div>
+                                <p>lorem ipsum dolor sit amet</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="choice-content">
+                    <a href="destination.php">
+                        <div class="image">
+                            <img src="./assets/images/maldives.jpg" alt="maldives" class="choice-content-image">
+                        </div>
+                        <div>
+                            <div class="choice-content-title">
+                                <img src="./assets/images/location-icon.webp" alt="location icon" class="location-icon">
+                                <h5>Maldives (Bali)</h5>
+                            </div>
+                            <div>
+                                <p>lorem ipsum dolor sit amet</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="choice-content">
+                    <a href="destination.php">
+                        <div class="image">
+                            <img src="./assets/images/phuket-thailand.jpeg" alt="phuket thailand" class="choice-content-image">
+                        </div>
+                        <div>
+                            <div class="choice-content-title">
+                                <img src="./assets/images/location-icon.webp" alt="location icon" class="location-icon">
+                                <h5>Phuket (Thailand)</h5>
+                            </div>
+                            <div>
+                                <p>lorem ipsum dolor sit amet</p>
+                            </div>
+                        </div>
+                    </a>
+                </div> -->
+            </div>
+            <!-- <div class="destination-choice">
                 <div class="choice-content">
                     <a href="destination.php">
                         <div class="image">
@@ -158,89 +247,7 @@ if (isset($_SESSION['user'])) {
                         </div>
                     </a>
                 </div>
-            </div>
-            <div class="destination-choice">
-                <div class="choice-content">
-                    <a href="destination.php">
-                        <div class="image">
-                            <img src="./assets/images/bedugul-bali.webp" alt="bedugul bali" class="choice-content-image">
-                        </div>
-                        <div>
-                            <div class="choice-content-title">
-                                <img src="./assets/images/location-icon.webp" alt="location icon" class="location-icon">
-                                <h5>Bedugul (Bali)</h5>
-                            </div>
-                            <div>
-                                <p>lorem ipsum dolor sit amet</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="choice-content">
-                    <a href="destination.php">
-                        <div class="image">
-                            <img src="./assets/images/eiffel-paris.jpg" alt="eiffel paris" class="choice-content-image">
-                        </div>
-                        <div>
-                            <div class="choice-content-title">
-                                <img src="./assets/images/location-icon.webp" alt="location icon" class="location-icon">
-                                <h5>Eiffel Tower (Paris)</h5>
-                            </div>
-                            <div>
-                                <p>lorem ipsum dolor sit amet</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="choice-content">
-                    <a href="destination.php">
-                        <div class="image">
-                            <img src="./assets/images/lake-vietnam.webp" alt="lake vietnam" class="choice-content-image">
-                        </div>
-                        <div>
-                            <div class="choice-content-title">
-                                <img src="./assets/images/location-icon.webp" alt="location icon" class="location-icon">
-                                <h5>Lake (Vietnam)</h5>
-                            </div>
-                            <div>
-                                <p>lorem ipsum dolor sit amet</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="choice-content">
-                    <a href="destination.php">
-                        <div class="image">
-                            <img src="./assets/images/maldives.jpg" alt="maldives" class="choice-content-image">
-                        </div>
-                        <div>
-                            <div class="choice-content-title">
-                                <img src="./assets/images/location-icon.webp" alt="location icon" class="location-icon">
-                                <h5>Maldives (Bali)</h5>
-                            </div>
-                            <div>
-                                <p>lorem ipsum dolor sit amet</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="choice-content">
-                    <a href="destination.php">
-                        <div class="image">
-                            <img src="./assets/images/phuket-thailand.jpeg" alt="phuket thailand" class="choice-content-image">
-                        </div>
-                        <div>
-                            <div class="choice-content-title">
-                                <img src="./assets/images/location-icon.webp" alt="location icon" class="location-icon">
-                                <h5>Phuket (Thailand)</h5>
-                            </div>
-                            <div>
-                                <p>lorem ipsum dolor sit amet</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            </div> -->
         </section>
         <section>
             <div class="section-subscribe">

@@ -24,6 +24,18 @@ if (isset($_SESSION['user'])) {
     <main>
         <section class="contact-section">
             <div class="w-50">
+                <?php if (isset($_SESSION['error'])): ?>
+                    <div class="alert alert-danger">
+                        <?= $_SESSION['error'];
+                        unset($_SESSION['error']); ?>
+                    </div>
+                <?php endif ?>
+                <?php if (isset($_SESSION['success'])): ?>
+                    <div class="alert alert-success">
+                        <?= $_SESSION['success'];
+                        unset($_SESSION['success']); ?>
+                    </div>
+                <?php endif ?>
                 <form action="proses_upload.php" method="post" enctype="multipart/form-data" class="form-contact" id="destinations-form">
                     <div class="form-group">
                         <label for="name">Name</label>
