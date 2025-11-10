@@ -292,42 +292,85 @@ if (isset($_SESSION['user'])) {
             </div>
             <div class="position-relative">
                 <div class="guide-bottom-img">
-                    <div class="guide-content">
-                        <div>
-                            <img src="./assets/images/eiffel-paris.jpg" alt="eiffel paris" class="guide-content-image">
-                        </div>
-                        <div class="p-16">
-                            <div>
-                                <h5>Eiffel Tower (Paris)</h5>
+                    <div class="guide-carousel-container">
+                        <div class="guide-track">
+                            <div class="guide-content">
+                                <div>
+                                    <img src="./assets/images/maldives.jpg" alt="maldives" class="guide-content-image">
+                                </div>
+                                <div class="p-16">
+                                    <div>
+                                        <h5>Maldives</h5>
+                                    </div>
+                                    <div>
+                                        <p>lorem ipsum dolor sit amet</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <p>lorem ipsum dolor sit amet</p>
+                            <div class="guide-content">
+                                <div>
+                                    <img src="./assets/images/phuket-thailand.jpeg" alt="phuket" class="guide-content-image">
+                                </div>
+                                <div class="p-16">
+                                    <div>
+                                        <h5>Phuket (Thailand)</h5>
+                                    </div>
+                                    <div>
+                                        <p>lorem ipsum dolor sit amet</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="guide-content">
-                        <div>
-                            <img src="./assets/images/eiffel-paris.jpg" alt="eiffel paris" class="guide-content-image">
-                        </div>
-                        <div class="p-16">
-                            <div>
-                                <h5>Eiffel Tower (Paris)</h5>
+                            <div class="guide-content">
+                                <div>
+                                    <img src="./assets/images/lake-vietnam.webp" alt="lake vietnam" class="guide-content-image">
+                                </div>
+                                <div class="p-16">
+                                    <div>
+                                        <h5>Lake (Vietnam)</h5>
+                                    </div>
+                                    <div>
+                                        <p>lorem ipsum dolor sit amet</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <p>lorem ipsum dolor sit amet</p>
+                            <div class="guide-content">
+                                <div>
+                                    <img src="./assets/images/bedugul-bali.webp" alt="bedugul bali" class="guide-content-image">
+                                </div>
+                                <div class="p-16">
+                                    <div>
+                                        <h5>Bedugul (Indonesia)</h5>
+                                    </div>
+                                    <div>
+                                        <p>lorem ipsum dolor sit amet</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="guide-content">
-                        <div>
-                            <img src="./assets/images/eiffel-paris.jpg" alt="eiffel paris" class="guide-content-image">
-                        </div>
-                        <div class="p-16">
-                            <div>
-                                <h5>Eiffel Tower (Paris)</h5>
+                            <div class="guide-content">
+                                <div>
+                                    <img src="./assets/images/eiffel-paris.jpg" alt="eiffel paris" class="guide-content-image">
+                                </div>
+                                <div class="p-16">
+                                    <div>
+                                        <h5>Eiffel Tower (Paris)</h5>
+                                    </div>
+                                    <div>
+                                        <p>lorem ipsum dolor sit amet</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <p>lorem ipsum dolor sit amet</p>
+                            <div class="guide-content">
+                                <div>
+                                    <img src="./assets/images/the-sanctuary.jpg" alt="the sanctuary" class="guide-content-image">
+                                </div>
+                                <div class="p-16">
+                                    <div>
+                                        <h5>The Sanctuary</h5>
+                                    </div>
+                                    <div>
+                                        <p>lorem ipsum dolor sit amet</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

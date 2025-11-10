@@ -662,7 +662,7 @@ h6 {
     }
 
     .guide-bottom-img {
-        display: grid;
+        display: block;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 32px;
 
@@ -671,6 +671,28 @@ h6 {
             grid-template-columns: 1fr;
         }
     }
+
+    .guide-carousel-container {
+        overflow: hidden;
+        width: 100%;
+        position: relative;
+        padding: 20px 0;
+        margin: -20px 0;
+    }
+
+
+    .guide-track {
+        display: flex;
+        gap: 32px;
+        transition: transform 0.4s ease;
+    }
+
+    .guide-content {
+        flex: 0 0 calc((100% / 3) - 22px);
+        box-sizing: border-box;
+    }
+
+
 }
 
 .form-row {
