@@ -242,20 +242,40 @@ function toggleTheme() {
 const track = document.querySelector('.guide-track');
 const cards = Array.from(track.children);
 const buttons = document.querySelectorAll('.rounded-button');
+
 let currentIndex = 0;
 
-const cardsPerView = Math.floor(track.parentElement.offsetWidth / (cards[0].offsetWidth + 20));
+// ambil gap dari CSS
+const gap = parseInt(getComputedStyle(track).gap);
 
+// lebar 1 kartu + gap
+function getSlideWidth() {
+    return cards[0].offsetWidth + gap;
+}
+
+// jumlah kartu yang terlihat
+function cardsPerView() {
+    return Math.floor(track.parentElement.offsetWidth / getSlideWidth());
+}
+
+// tombol NEXT
 buttons[1].addEventListener('click', () => {
-    if (currentIndex < cards.length - cardsPerView) {
+    const maxIndex = cards.length - cardsPerView();
+    if (currentIndex < maxIndex) {
         currentIndex++;
-        track.style.transform = `translateX(-${currentIndex * (cards[0].offsetWidth + 20)}px)`;
+        track.style.transform = `translateX(-${currentIndex * getSlideWidth()}px)`;
     }
 });
 
+// tombol PREV
 buttons[0].addEventListener('click', () => {
     if (currentIndex > 0) {
         currentIndex--;
-        track.style.transform = `translateX(-${currentIndex * (cards[0].offsetWidth + 20)}px)`;
+        track.style.transform = `translateX(-${currentIndex * getSlideWidth()}px)`;
     }
+});
+
+// optional: reset saat resize
+window.addEventListener('resize', () => {
+    track.style.transform = `translateX(-${currentIndex * getSlideWidth()}px)`;
 });
